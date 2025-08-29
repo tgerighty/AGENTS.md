@@ -1,0 +1,38 @@
+## changelog
+
+after you make a change that is noteworthy, add an entry in the CHANGELOG.md file in the root of the package. there are 2 kinds of packages, public and private packages. private packages have a private: true field in package.json, public packages do not and instead have a version field in package.json. public packages are the ones that are published to npm.
+
+to write a changelog.md file for a public package, use the following format, add a heading with the new version and a bullet list of your changes, like this:
+
+```md
+## 0.1.3
+
+### Patch Changes
+
+- bug fixes
+
+## 0.1.2
+
+### Patch Changes
+
+- add support for githubPath
+```
+
+For private packages, which do not have versions, you must instead use the current date and time, for example:
+
+```md
+# Changelog
+
+## 2025-01-24 19:50
+
+- Added a feature to improve user experience
+- Fixed a bug that caused the app to crash on startup
+```
+
+these are just example, be clear and consies in your changelog entries.
+
+use present tense. Be detailed but concise, omit useless verbs like "implement", "added", just put the subject there instead, so it is showerer. it's implicit we are adding feature or fixes. do not use nested bullet points. Always show example code snippets if applicable, and use proper markdown formatting.
+
+```
+
+the website package has a dependency on docs-website. instead of duplicating code that is needed both in website and docs-website keep a file in docs-website instead and import from there for the website package.
