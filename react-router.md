@@ -4,13 +4,13 @@ the website uses react-router v7.
 
 NEVER start the dev server yourself with `pnpm dev`, instead ask me to do so.
 
-React-router framework is the successor of Remix, it is basically the same framework and it uses loaders and actions as core features.
+react-router framework is the successor of remix. it is basically the same framework and it uses loaders and actions as core features.
 
 react-router follows all the conventions of remix but all imports must be updated to point to `react-router` instead of `@remix-run/react` or `@remix-run/node`.
 
 ## react-router navigation state
 
-react-router has the hook `useNavigation` that expose the navigation state, ALWAYS use this hook to track loading state for navigation
+react-router has the hook `useNavigation` that exposes the navigation state. ALWAYS use this hook to track loading state for navigation
 
 ```ts
 const navigation = useNavigation()
@@ -34,31 +34,31 @@ export function Component() {
 }
 ```
 
-the loader data from parent layouts will NOT be present in the children routes `Route.componentProps['loaderData']` type. Instead you have to use the `useRouteLoaderData('/prefix-path')` instead. Always add the type to this calls getting the `Route` type from the parent layout
+the loader data from parent layouts will NOT be present in the children routes `Route.componentProps['loaderData']` type. instead you have to use the `useRouteLoaderData('/prefix-path')` instead. always add the type to these calls getting the `Route` type from the parent layout
 
 > layout routes should ALWAYS export their own Route namespace types so that child route can use it to type `useRouteLoaderData`!
 
 ## cookies
 
-never use react-router or remix `createCookieSessionStorage`, instead just use the npm cookie package to serialize and parse cookies. keep it simple.
+never use react-router or remix `createCookieSessionStorage`. instead just use the npm cookie package to serialize and parse cookies. keep it simple.
 
-if you want to store json data in cookies remember to use encodeURIComponent to encode the data before storing it in the cookie, and decodeURIComponent to decode it when reading it back. This is because cookies can only store string values.
+if you want to store json data in cookies, remember to use encodeURIComponent to encode the data before storing it in the cookie, and decodeURIComponent to decode it when reading it back. this is because cookies can only store string values.
 
 ## website, react-routes
 
 website routes use the flat routes filesystem routes, inside src/routes. these files encode the routing logic in the filename, using $id for params and dot . for slashes.
 
-if 2 routes share the same prefix then the loader of both routes is run on a request and the route with the shorter routename is called a layout. a layout can also use <Outlet /> to render the child route inside it. for example /org/x/site will run loaders in `org.$orgid` and `org.$orgid.site`. if you want instead to create a route that is not a layout route, where the loader does not run for routes that share the prefix, append \_index to the filename, for example `org.$orgid._index` in the example before.
+if 2 routes share the same prefix, then the loader of both routes is run on a request and the route with the shorter route name is called a layout. a layout can also use <Outlet /> to render the child route inside it. for example, /org/x/site will run loaders in `org.$orgid` and `org.$orgid.site`. if you want instead to create a route that is not a layout route, where the loader does not run for routes that share the prefix, append \_index to the filename, for example `org.$orgid._index` in the example before.
 
-if you need to add new prisma queries or data fetching in loaders put it in layouts if possible, this way the data is fetched less often. you can do this if the data does not depend on the children routes specific parameters.
+if you need to add new prisma queries or data fetching in loaders, put it in layouts if possible. this way the data is fetched less often. you can do this if the data does not depend on the children routes' specific parameters.
 
 ## route file exports
 
-You can export the functions `loader` and `action` to handle loading data and submitting user data.
+you can export the functions `loader` and `action` to handle loading data and submitting user data.
 
-The default export (not always required for API routes) is the jsx component that renders the page visually.
+the default export (not always required for API routes) is the jsx component that renders the page visually.
 
-Notice that the `json` utils was removed from `react-router`, instead there is a function `data` which is very similar and accepts a second argument to add headers and status like `json` does, but it supports more data types than json, like generators, async generators, dates, map, sets, etc.
+notice that the `json` util was removed from `react-router`. instead there is a function `data` which is very similar and accepts a second argument to add headers and status like `json` does, but it supports more data types than json, like generators, async generators, dates, map, sets, etc.
 
 ## Route type safety
 
@@ -66,13 +66,13 @@ react-router exports a `Route` namespace with types like `Route.LoaderArgs`, `Ro
 
 these types can be used for the main route exports, they must be imported from `./+types/{route-basename}`
 
-For example if the current file is `src/routes/home.tsx` you can import `import { Route } from './+types/home'`.
+for example, if the current file is `src/routes/home.tsx` you can import `import { Route } from './+types/home'`.
 
-When using loader data in components it is preferable to use useRouteLoaderData instead of just useLoaderData, so that if the route data is not accessible a error is thrown instead of silently fail with the wrong data.
+when using loader data in components, it is preferable to use useRouteLoaderData instead of just useLoaderData, so that if the route data is not accessible an error is thrown instead of silently failing with the wrong data.
 
-You can use the Route types even to type other components that rely on `useRouteLoaderData`. But to do this you cannot import from `+types`, only routes files can do that. Instead you should export the Route type from the route file and let the component file import from the route.
+you can use the Route types even to type other components that rely on `useRouteLoaderData`. but to do this you cannot import from `+types`, only route files can do that. instead you should export the Route type from the route file and let the component file import from the route.
 
-Here is an example to get the loader data type safely from a component:
+here is an example to get the loader data type safely from a component:
 
 > useRouteLoaderData return type is `Route.componentProps['loaderData']`
 
@@ -93,7 +93,7 @@ const { userId } = useRouteLoaderData(
 ) as Route.componentProps['loaderData']
 ```
 
-You can do the same thing with action data, using `Route.componentProps['actionData']`
+you can do the same thing with action data, using `Route.componentProps['actionData']`
 
 ## links type safety
 
@@ -105,17 +105,17 @@ import { href } from 'react-router'
 const path = href('/org/:orgId', { orgId })
 ```
 
-If you need to have an absolute url you can do `new URL(href('/some/path'), env.PUBLIC_URL)`
+if you need to have an absolute url you can do `new URL(href('/some/path'), env.PUBLIC_URL)`
 
-The only case where you should not use href is for urls outside of current app or routes like `routes/$.tsx`, basically routes that match all paths.
+the only case where you should not use href is for urls outside of the current app or routes like `routes/$.tsx`, basically routes that match all paths.
 
-> if you cannot use `href` simply because the route you would like to link to does not exist you should do the following: list all the files in the src/routes folder first, to see if it already exists but not with the name you would expect. If still you can't find one, create a simple placeholder react-router route with a simple Page component and a simple loader that does what you would expect. do not write too much code. you can improve on it in later messages.
+> if you cannot use `href` simply because the route you would like to link to does not exist, you should do the following: list all the files in the src/routes folder first, to see if it already exists but not with the name you would expect. if still you can't find one, create a simple placeholder react-router route with a simple page component and a simple loader that does what you would expect. do not write too much code. you can improve on it in later messages.
 
 ## showing spinner while loader does work and then redirect
 
-For routes that do slow operations like creating PRs and then redirect, use a loader that returns a promise. The component uses window.location.replace when the promise resolves.
+for routes that do slow operations like creating PRs and then redirect, use a loader that returns a promise. the component uses window.location.replace when the promise resolves.
 
-> IMPORTANT: React Router does not preserve errors thrown in promises returned from loaders. NEVER throw errors inside promises returned from loaders. Instead, add a .catch to make sure errors are never thrown and returned as values instead. then use instance of check in client
+> IMPORTANT: react router does not preserve errors thrown in promises returned from loaders. NEVER throw errors inside promises returned from loaders. instead, add a .catch to make sure errors are never thrown and returned as values instead. then use instanceof check in client
 
 ```tsx
 export async function loader({ request, params: { id } }: Route.LoaderArgs) {
@@ -150,18 +150,18 @@ export default function Page() {
 
 ## do not redirect to missing routes that do not exist
 
-never redirect or link to a route that does not exist, instead create a simple placeholder route with a simple loader and component instead. then redirect there using type safe path with `href`
+never redirect or link to a route that does not exist. instead create a simple placeholder route with a simple loader and component. then redirect there using type-safe path with `href`
 
-if instead it's not clear where to redirect because an user resource is missing, check if an onboarding route exists for that resource or a generic onboarding route. redirect there instead
+if instead it's not clear where to redirect because a user resource is missing, check if an onboarding route exists for that resource or a generic onboarding route. redirect there instead
 
 also keep in mind it's preferable to throw redirects in loaders instead of returning responses, so loader keeps type safety.
 
 ## client side navigation is preferred
 
-always try use use react-router `useNavigate` or `Link` instead of doing window.location.href update.
+always try to use react-router `useNavigate` or `Link` instead of doing window.location.href update.
 
-so that internal navigation are done client side and are faster. notice that navigate only accepts a relative path and not a full url, so if you have a full url you should do new URL(url).pathname. only use navigate if you know the url is relative to the app.
+so that internal navigation is done client side and is faster. notice that navigate only accepts a relative path and not a full url, so if you have a full url you should do new URL(url).pathname. only use navigate if you know the url is relative to the app.
 
 ## Link or a components are preferred over `navigate`
 
-ALWAYS use link components instead of the navigate function if possible, for example in a dropdown component you should wrap the dropdown item in a link instead of adding a onClick handler.
+ALWAYS use link components instead of the navigate function if possible. for example, in a dropdown component you should wrap the dropdown item in a link instead of adding an onClick handler.

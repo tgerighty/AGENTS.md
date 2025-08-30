@@ -1,24 +1,24 @@
-## Sentry
+## sentry
 
-This project uses Sentry to notify about unexpected errors.
+this project uses sentry to notify about unexpected errors.
 
-The website folder will have a src/lib/errors.ts file with an exported function `notifyError(error: Error, contextMessage: string)`.
+the website folder will have a src/lib/errors.ts file with an exported function `notifyError(error: Error, contextMessage: string)`.
 
-You should ALWAYS use notifyError in these cases:
+you should ALWAYS use notifyError in these cases:
 
-- create a new Spiceflow api app, put notifyError in the onError callback with context message including the api route path
+- create a new spiceflow api app, put notifyError in the onError callback with context message including the api route path
 - suppressing an error for operations that can fail. instead of doing console.error(error) you should instead call notifyError
-- wrapping a promise with Cloudflare `waitUntil`. Add a .catch and a notifyError so errors are tracked
+- wrapping a promise with cloudflare `waitUntil`. add a .catch and a notifyError so errors are tracked
 
-This function will add the error in Sentry so that the developer is able to track users errors
+this function will add the error in sentry so that the developer is able to track users' errors
 
 ## errors.ts file
 
-If a package is missing the errors.ts file here is the template for adding one.
+if a package is missing the errors.ts file, here is the template for adding one.
 
-Notice that
+notice that
 
-- dsn should be replaced by the user with the right one. Ask to do so
+- dsn should be replaced by the user with the right one. ask to do so
 - use the sentries npm package, this handles correctly every environment like Bun, Node, Browser, etc
 
 ```tsx
@@ -58,8 +58,8 @@ export class AppError extends Error {
 }
 ```
 
-## AppError
+## app error
 
-Every time you throw an user readable error you should use AppError instead of Error
+every time you throw a user-readable error you should use AppError instead of Error
 
-AppError messages will be forwarded to the user as is, normal Error instances instead could have their messages obfuscated
+AppError messages will be forwarded to the user as is. normal Error instances instead could have their messages obfuscated

@@ -12,7 +12,7 @@ NEVER run `pnpm push` in db or commands like `pnpm prisma db push` or other pris
 
 ### prisma queries for relations
 
-- NEVER add more than 1 include nesting. This is very bad for performance because prisma will have to do the query to get the relation sequentially. Instead of adding a new nested `include` you should add a new prisma query and wrap them in a `Promise.all`
+- NEVER add more than 1 include nesting. this is very bad for performance because prisma will have to do the query to get the relation sequentially. instead of adding a new nested `include` you should add a new prisma query and wrap them in a `Promise.all`
 
 ### prisma transactions for complex relations inserts
 
@@ -23,11 +23,11 @@ for very complex updates or inserts that involve more than 3 related tables, for
 - recreate all the tables again, reuse the old existing rows data when you don't have all the fields available
 - make sure to create all the rows in the related tables. use for loops if necessary
 
-### prisma, always make sure use has access to prisma tables
+### prisma, always make sure user has access to prisma tables
 
 > IMPORTANT! always read the schema.prisma file before adding a new prisma query, to understand how to structure it
 
-try to never write sql by hand, user prisma
+try to never write sql by hand, use prisma
 
 if a query becomes too complex because fetching too deeply into related tables (more than 1 `include` nesting), use different queries instead, put them in a Promise.all
 
@@ -41,11 +41,11 @@ this is especially important in react-router loaders
 
 ### prisma security
 
-All loaders, actions and Spiceflow routes of the project should have authorization checks.
+all loaders, actions and spiceflow routes of the project should have authorization checks.
 
-These checks should check that the current user, identified by userId, has access to the fetched and updated rows.
+these checks should check that the current user, identified by userId, has access to the fetched and updated rows.
 
-This simply mean to always include a check in prisma queries to make sure that the user has access to the updated or queries rows, for example:
+this simply means to always include a check in prisma queries to make sure that the user has access to the updated or queried rows, for example:
 
 ```typescript
 const resource = await prisma.resource.findFirst({
@@ -58,9 +58,9 @@ if (!resource) {
 
 ### prisma transactions
 
-NEVER use prisma interactive transatciont (passing a function to `prisma.$transaction`), instead pass an array of operations. this is basically the same thing, operations are executed in order, but it has much better performance.
+NEVER use prisma interactive transactions (passing a function to `prisma.$transaction`), instead pass an array of operations. this is basically the same thing, operations are executed in order, but it has much better performance.
 
-If you need to use complex logic to construct the array of operations, create a empty array using `const operations: Prisma.PrismaPromise<any>[]` first, then push to this array the queries you want to excecute
+if you need to use complex logic to construct the array of operations, create an empty array using `const operations: Prisma.PrismaPromise<any>[]` first, then push to this array the queries you want to execute
 
 > IMPORTANT! while constructing the operations array you should never call await in between, this would cause the prisma query to start and would make the transaction invalid.
 
@@ -70,7 +70,7 @@ If you need to use complex logic to construct the array of operations, create a 
 
 if you throw an error that is not unexpected you should use the `AppError` class, this way I can skip sending these errors to Sentry in the `notifyError` function
 
-For example for cases where a resource is not found or user has no subscription.
+for example for cases where a resource is not found or user has no subscription.
 
 you can even throw response errors, for example:
 

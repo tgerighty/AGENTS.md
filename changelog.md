@@ -18,7 +18,7 @@ to write a changelog.md file for a public package, use the following format, add
 - add support for githubPath
 ```
 
-For private packages, which do not have versions, you must instead use the current date and time, for example:
+for private packages, which do not have versions, you must instead use the current date and time, for example:
 
 ```md
 # Changelog
@@ -29,9 +29,9 @@ For private packages, which do not have versions, you must instead use the curre
 - Fixed a bug that caused the app to crash on startup
 ```
 
-these are just example, be clear and consies in your changelog entries.
+these are just examples. be clear and concise in your changelog entries.
 
-use present tense. Be detailed but concise, omit useless verbs like "implement", "added", just put the subject there instead, so it is showerer. it's implicit we are adding feature or fixes. do not use nested bullet points. Always show example code snippets if applicable, and use proper markdown formatting.
+use present tense. be detailed but concise, omit useless verbs like "implement", "added", just put the subject there instead, so it is shorter. it's implicit we are adding features or fixes. do not use nested bullet points. always show example code snippets if applicable, and use proper markdown formatting.
 
 ```
 
