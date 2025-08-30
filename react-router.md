@@ -22,6 +22,41 @@ if (navigation.state === 'loading' || navigation.state === 'submitting') {
 
 > when making changes to the website code only use the `pnpm typecheck` script to validate changes, NEVER run `pnpm build` unless asked. It is too slow.
 
+## Creating New Routes and Handling Types
+
+When creating a new React Router route, follow these steps:
+
+### 1. Create the route file
+Create a file in `src/routes/` using flat routes naming convention (dots for separators, $ for params, kebab-case).
+
+### 2. Generate types
+**IMPORTANT**: Types are NOT automatically generated. After creating a route, run:
+```bash
+pnpm exec react-router typegen
+```
+
+### 3. Import Route types
+```typescript
+import type { Route } from './+types/your-route-name'
+```
+Note: The `+types` directory doesn't physically exist - it's virtual/generated.
+
+### 4. Verify with typecheck
+```bash
+pnpm typecheck  # This runs typegen first, then tsc
+```
+
+### Troubleshooting Missing Types
+- Types missing? Run `pnpm exec react-router typegen`
+- Import failing? Check filename matches import path exactly
+- Types not updating? Run `pnpm typecheck` to regenerate
+- The `+types` directory is virtual - don't look for it in the filesystem
+
+### Best Practices
+- Always run `pnpm typecheck` after creating/modifying routes
+- Export `Route` type from layout routes for child routes to import
+- Use `href()` for all internal paths, even in redirects
+
 ## react-router layout routes
 
 react-router layout routes are simply routes that share a prefix with some children routes. these routes will run their loaders and components also when the children paths are fetched.
