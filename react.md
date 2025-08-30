@@ -1,6 +1,6 @@
 ## react
 
-- never test react code. instead put as much code as possible in react agonistic function or classes and test those if needed.
+- never test react code. instead put as much code as possible in react agnostic function or classes and test those if needed.
 
 - hooks, all functions that start with use, MUST ALWAYS be called in the component render scope, never inside other closures in the component or event handlers. Follow react rules of hooks.
 
