@@ -13,6 +13,9 @@ curl -s https://raw.githubusercontent.com/remorses/AGENTS.md/main/pnpm.md
 # react
 curl -s https://raw.githubusercontent.com/remorses/AGENTS.md/main/react.md
 
+# handling errors
+curl -s https://raw.githubusercontent.com/remorses/AGENTS.md/main/sentry.md
+
 # Vitest testing framework
 curl -s https://raw.githubusercontent.com/remorses/AGENTS.md/main/vitest.md
 
