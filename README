@@ -16,6 +16,7 @@ for f in \
   docs-writing.md \
   doppler.md \
   cac.md \
+  gitchamber.md \
   prisma.md \
   react-router.md \
   shadcn.md \
