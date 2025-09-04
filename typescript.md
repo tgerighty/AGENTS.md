@@ -32,6 +32,8 @@
 
 - NEVER start the development server with pnpm dev yourself. there is no reason to do so, even with &
 
+- When creating classes do not add setters and getters for a simple private field. instead make the field public directly so user can get it or set it himself without abstractions on top
+
 - if you encounter typescript lint errors for an npm package, read the node_modules/package/\*.d.ts files to understand the typescript types of the package. if you cannot understand them, ask me to help you with it.
 
 ```ts
