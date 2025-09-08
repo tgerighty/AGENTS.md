@@ -8,6 +8,12 @@ if you need to install packages always use pnpm
 
 instead of adding packages directly in package.json use `pnpm install package` inside the right workspace folder. NEVER manually add a package by updating package.json
 
+## updating a package
+
+when i ask you to update a package always run `pnpm update -r packagename`. to update to latest also add --latest
+
+Do not do `pnpm add packagename` to update a package. only to add a missing one. otherwise other packages versions will get out of sync.
+
 ## fixing duplicate pnpm dependencies
 
 sometimes typescript will fail if there are 2 duplicate packages in the workspace node_modules. this can happen in pnpm if a package is used in 2 different places (even if inside a node_module package, transitive dependency) with a different set of versions for a peer dependency
