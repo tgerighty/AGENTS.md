@@ -11,3 +11,8 @@ NEVER add comments unless I tell you
 ## files
 
 always use kebab case for new filenames. never use uppercase letters in filenames
+
+
+## see files in the repo
+
+use `git ls-files | tree --fromfile` to see files in the repo. this command will ignore files ignored by git
