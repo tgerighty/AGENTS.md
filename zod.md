@@ -6,9 +6,18 @@ when you need to create a complex type that comes from a prisma table, do not cr
 
 ## converting zod schema to jsonschema
 
-
 you MUST use the built in zod v4 toJSONSchema and not the npm package `zod-to-json-schema` which is outdated and does not support zod v4.
 
 ```ts
-import { toJSONSchema } from 'zod'
+import { toJSONSchema } from "zod";
+
+const mySchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(3).max(100),
+  age: z.number().min(0).optional(),
+});
+
+const jsonSchema = toJSONSchema(mySchema, {
+  removeAdditionalStrategy: "strict",
+});
 ```
