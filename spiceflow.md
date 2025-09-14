@@ -1,6 +1,6 @@
 # spiceflow
 
-before writing or updating spiceflow related code always execute this command to get Spiceflow full documentation: `curl -s https://gitchamber.com/remorses/spiceflow/main/files/README.md`
+before writing or updating spiceflow related code always execute this command to get Spiceflow full documentation: `curl -s https://gitchamber.com/repos/remorses/spiceflow/main/files/README.md`
 
 spiceflow is an API library similar to hono, it allows you to write api servers using whatwg requests and responses
 
