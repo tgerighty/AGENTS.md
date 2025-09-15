@@ -1,4 +1,4 @@
-## react
+# react
 
 - never test react code. instead put as much code as possible in react-agnostic functions or classes and test those if needed.
 

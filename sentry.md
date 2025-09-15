@@ -1,4 +1,4 @@
-## sentry
+# sentry
 
 this project uses sentry to notify about unexpected errors.
 

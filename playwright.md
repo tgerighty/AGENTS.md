@@ -1,4 +1,4 @@
-## playwright
+# playwright
 
 you can control the browser using the playwright mcp tools. these tools let you control the browser to get information or accomplish actions
 

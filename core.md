@@ -1,3 +1,5 @@
+# core guidelines
+
 when summarizing changes at the end of the message, be super short, a few words and in bullet points, use bold text to highlight important keywords. use markdown.
 
 please ask questions and confirm assumptions before generating complex architecture code.

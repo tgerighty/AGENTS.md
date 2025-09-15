@@ -1,4 +1,4 @@
-## tailwind v4
+# tailwind v4
 
 this project uses tailwind v4. this new tailwind version does not use tailwind.config.js. instead it does all configuration in css files.
 

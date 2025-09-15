@@ -1,3 +1,3 @@
-## cac for cli development
+# cac for cli development
 
 the cli uses cac npm package.

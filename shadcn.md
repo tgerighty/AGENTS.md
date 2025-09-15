@@ -1,4 +1,4 @@
-## styling
+# styling
 
 - always use tailwind for styling. prefer using simple styles using flex and gap. margins should be avoided, instead use flexbox gaps, grid gaps, or separate spacing divs.
 

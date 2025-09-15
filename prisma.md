@@ -1,4 +1,4 @@
-## prisma
+# prisma
 
 this project uses prisma to interact with the database. if you need to add new queries always read the schema.prisma inside the db folder first so you understand the shape of the tables in the database.
 
