@@ -6,7 +6,7 @@ spiceflow is an API library similar to hono, it allows you to write api servers 
 
 use zod to create schemas and types that need to be used for tool inputs or spiceflow API routes.
 
-## calling the server from the client
+## calling the server from the clientE
 
 you can obtain a type safe client for the API using `createSpiceflowClient` from `spiceflow/client`
 
