@@ -13,6 +13,8 @@ to understand how the code you are writing works, you should add inline snapshot
 
 - NEVER writes the snapshots content yourself in `toMatchInlineSnapshot`. instead leave it empty and call `pnpm test -u` to fill in snapshots content.
 
+- when updating implementation and `toMatchInlineSnapshot` should change, DO NOT remove the inline snapshots yourself, just run `pnpm test -u` instead! This will replace contents of the snapshots without wasting time doing it yourself.
+
 - for very long snapshots you should use `toMatchFileSnapshot(filename)` instead of `toMatchInlineSnapshot()`. put the snapshot files in a snapshots/ directory and use the appropriate extension for the file based on the content
 
 never test client react components. only server code that runs on the server.
