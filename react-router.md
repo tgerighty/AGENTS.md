@@ -237,4 +237,4 @@ pnpm typecheck  # This runs typegen first, then tsc
 
 ## debugging build failures
 
-when you build the website always pipe the output to a file so you can later grep inside it for errors. with `pnpm build 2>&1 | tee build.log`
+when you build the website always pipe the output to a file so you can later grep inside it for errors. with `pnpm build 2>&1 | build.log`
