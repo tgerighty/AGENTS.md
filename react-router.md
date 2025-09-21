@@ -234,3 +234,7 @@ pnpm typecheck  # This runs typegen first, then tsc
 - Always run `pnpm typecheck` after creating/modifying routes
 - Export `Route` type from layout routes for child routes to import
 - Use `href()` for all internal paths, even in redirects
+
+## debugging build failures
+
+when you build the website always pipe the output to a file so you can later grep inside it for errors. with `pnpm build 2>&1 | tee build.log`
