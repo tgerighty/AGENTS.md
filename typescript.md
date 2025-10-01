@@ -91,7 +91,7 @@ const users: User[] = [];
 
 remember to always add the explicit type to avoid unexpected type inference.
 
-- when using nodejs apis like fs always import the module and not the named exports
+- when using nodejs APIs like fs always import the module and not the named exports. I prefer hacing nodejs APIs accessed on the module namspace like fs, os, path, etc.
 
 DO `import fs from 'fs'; fs.writeFileSync(...)`
 DO NOT `import { writeFileSync } from 'fs';`
