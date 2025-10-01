@@ -2,6 +2,10 @@
 
 you can use the `gh` cli to do operations on github for the current repository. For example: open issues, open PRs, check actions status, read workflow logs, etc.
 
+## get current github repo
+
+`git config --get remote.origin.url`
+
 ## checking status of latest github actions workflow run
 
 ```bash
