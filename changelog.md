@@ -2,6 +2,10 @@
 
 after you make a change that is noteworthy, add an entry in the CHANGELOG.md file in the root of the package. there are 2 kinds of packages, public and private packages. private packages have a private: true field in package.json, public packages do not and instead have a version field in package.json. public packages are the ones that are published to npm.
 
+If the current package has a version field and it is not private then include the version in the changelog too like in the examples, otherwise use the current date and time.
+
+If you use the version you MUST use a bumped version compared to the current package.json version, and you should update the package.json version field to that version. But do not publish. I will handle that myself.
+
 to write a changelog.md file for a public package, use the following format, add a heading with the new version and a bullet list of your changes, like this:
 
 ```md
