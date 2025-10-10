@@ -1,0 +1,64 @@
+#!/usr/bin/env node
+
+import cac from 'cac'
+import fs from 'fs'
+import https from 'https'
+
+const cli = cac('agentsdotmd')
+
+async function fetchFromGitHub(repo, file) {
+  const url = `https://raw.githubusercontent.com/${repo}/main/${file}`
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      let data = ''
+      res.on('data', (chunk) => data += chunk)
+      res.on('end', () => {
+        if (res.statusCode === 200) {
+          resolve(data)
+        } else {
+          reject(new Error(`Failed to fetch ${file} from ${repo}: HTTP ${res.statusCode}`))
+        }
+      })
+    }).on('error', reject)
+  })
+}
+
+function readLocalFile(file) {
+  return fs.readFileSync(file, 'utf-8')
+}
+
+cli
+  .command('[...files]', 'Generate AGENTS.md from files')
+  .option('--repo <repo>', 'GitHub repository (e.g., remorses/AGENTS.md)', {
+    default: 'remorses/AGENTS.md'
+  })
+  .action(async (files, options) => {
+    if (!files || files.length === 0) {
+      console.error('Error: No files specified')
+      process.exit(1)
+    }
+
+    const repo = options.repo
+
+    const promises = files.map(async (file) => {
+      if (file.startsWith('./')) {
+        return readLocalFile(file)
+      } else {
+        return await fetchFromGitHub(repo, file)
+      }
+    })
+
+    try {
+      const contents = await Promise.all(promises)
+      const content = contents.join('\n') + '\n'
+      fs.writeFileSync('AGENTS.md', content)
+      console.log(`AGENTS.md generated successfully with ${files.length} file(s)`)
+    } catch (error) {
+      console.error(`Error processing files:`, error.message)
+      process.exit(1)
+    }
+  })
+
+cli.help()
+
+cli.parse()
